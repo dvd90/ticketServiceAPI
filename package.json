@@ -1,0 +1,15 @@
+{
+  "name": "ticketserviceapi",
+  "version": "1.0.0",
+  "description": "HW 1 - Ticket service for Lady Gaga live show in Israel. ",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "author": "David Sellam",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^3.0.0",
+    "moment": "^2.24.0"
+  }
+}
