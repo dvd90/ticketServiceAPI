@@ -1,5 +1,7 @@
 # Ticket Service API
 
+#### *For more infos on the documentation website*
+https://documenter.getpostman.com/view/7216674/SWDzeM4W?version=latest#error-codes
 
 # Introduction
 This is an Api that provide a http interface in order to book tickets for the Lady Gaga live show in Tel Aviv.
@@ -54,8 +56,6 @@ The Authentication of the user is made by "Query Params" name, password
 - **401** -> Authorization
 - **404** -> Path doesn't exist
 
-#### *For more infos on the documentation website*
-https://documenter.getpostman.com/view/7216674/SWDzeM4W?version=latest#error-codes
 
 
 Thanks
