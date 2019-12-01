@@ -1,6 +1,4 @@
 const tickets = require('./models/ticket_service');
-const userRepo = require('./models/user_repo');
-const config = require('./config').tickets;
 const moment = require('moment');
 
 const badRequest = (req, res) => {
@@ -38,7 +36,6 @@ const AddOrder = (req, res, user_repo) => {
                 res.end(`Your order is confirmed 🎉\nYour Id is: ${done.getId()}`);
             }
         } else if (req.urlObject.query.name && req.urlObject.query.password) {
-            console.log("herrererere")
             const new_user = user_repo.addUser(req.urlObject.query.name, req.urlObject.query.password)
             const done = tickets.addOrder(moment().format('DD-MM-YYYY'), payload.nbtickets, new_user);
             if (done) {
@@ -72,7 +69,6 @@ const ResetOrders = (req, res, user_repo) => {
 }
 
 const CancelOrder = (req, res) => {
-    console.log('/cancelOrder  called!');
     if (tickets.deleteOrder(parseInt(req.urlObject.query.id))) {
         res.writeHeader(200);
         res.end(`The order id: ${req.urlObject.query.id} was successfully deleted 💣`);
