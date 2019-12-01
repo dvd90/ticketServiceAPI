@@ -25,4 +25,8 @@ module.exports = class Order {
     setNbTickets(nb) {
         this.nbTickets = nb;
     }
+
+    getUserName() {
+        return this.user.getName();
+    }
 }

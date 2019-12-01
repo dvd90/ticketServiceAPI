@@ -1,6 +1,7 @@
 const url = require('url');
-const { GetOrders, AddOrder, badRequest, EditOrder, ResetOrders, CancelOrder } = require('./handlers');
+const { GetOrders, AddOrder, badRequest, EditOrder, ResetOrders, CancelOrder, logs } = require('./handlers');
 const userRepo = require('./models/user_repo');
+const fs = require('fs');
 
 module.exports = (req, res) => {
     console.log(`Request ${req.method} came from ${req.url}`);
@@ -13,6 +14,9 @@ module.exports = (req, res) => {
         case 'GET':
             if (urlObject.path.startsWith('/getAllOrders')) {
                 GetOrders(req, res, user_repo);
+                break;
+            } else if (urlObject.path.startsWith('/logs')) {
+                logs(req, res, user_repo);
                 break;
             }
         case 'POST':

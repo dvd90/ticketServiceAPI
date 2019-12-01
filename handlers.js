@@ -48,7 +48,7 @@ const AddOrder = (req, res, user_repo) => {
 }
 
 const EditOrder = (req, res) => {
-    if (tickets.changeOrder(parseInt(req.urlObject.query.id), moment().format('DD-MM-YYYY'), parseInt(req.urlObject.query.id))) {
+    if (tickets.changeOrder(parseInt(req.urlObject.query.id), moment().format('DD-MM-YYYY'), parseInt(req.urlObject.query.tickets))) {
         res.end(`The order id: ${req.urlObject.query.id} was successfully edited 💣`);
     } else {
         res.writeHeader(400);
@@ -79,11 +79,26 @@ const CancelOrder = (req, res) => {
     }
 }
 
+const logs = (req, res, user_repo) => {
+    // Authentication
+    const admin = user_repo.checkUserAdmin(req.urlObject.query.name, req.urlObject.query.password);
+    if (admin) {
+        const logs = tickets.getLogs();
+        res.writeHeader(200);
+        res.end(logs);
+    } else {
+        res.writeHeader(401);
+        res.end("Sorry but you don't have the authorisation ✋");
+    }
+}
+
+
 module.exports = {
     GetOrders,
     AddOrder,
     badRequest,
     EditOrder,
     ResetOrders,
-    CancelOrder
+    CancelOrder,
+    logs
 };

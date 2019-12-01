@@ -1,6 +1,7 @@
 const order = require('./order');
 const EventEmitter = require('events');
 const config = require('./../config').tickets;
+const moment = require('moment');
 
 class TicketService extends EventEmitter {
     constructor(availableTickets) {
@@ -8,6 +9,7 @@ class TicketService extends EventEmitter {
         this.orders = [];
         this.availableTickets = availableTickets;
         this.soldTickets = 0;
+        this.logs = `${moment().format('MMMM Do YYYY, h:mm:ss a')} - The Ticket service is open with ${availableTickets} tickets available\n\n`;
     }
 
     storeOpen() {
@@ -27,12 +29,16 @@ class TicketService extends EventEmitter {
             this.orders.push(ord);
             this.availableTickets -= tickets;
             this.soldTickets += tickets;
+            this.logs += `${moment().format('MMMM Do YYYY, h:mm:ss a')} - A new order has been made by ${ord.getUserName()} of ${tickets} tickets\n`;
+            this.logs += `Number of Tickets available: ${this.availableTickets}\n\n`;
             this.emit("Add order", ord);
 
             return ord;
         }
-        this.emit("Add order", false);
+        this.logs += `${moment().format('MMMM Do YYYY, h:mm:ss a')} - Unsuccessful order request of ${tickets} tickets\n`;
+        this.logs += `Number of Tickets available: ${this.availableTickets}\n\n`;
 
+        this.emit("Add order", false);
         return false;
     }
 
@@ -44,10 +50,14 @@ class TicketService extends EventEmitter {
         const order = this.findOrder(id);
         if (order) {
             this.orders = this.orders.filter((order) => order.getId() != id);
+            this.logs += `${moment().format('MMMM Do YYYY, h:mm:ss a')} - An order has been deleted by ${order.getUserName()}\n`;
+            this.logs += `Number of Tickets available: ${this.availableTickets}\n\n`;
             this.emit("Delete order", true);
 
             return true;
         } else {
+            this.logs += `${moment().format('MMMM Do YYYY, h:mm:ss a')} - Request to delete an Order was unsuccessful\n`;
+            this.logs += `Number of Tickets available: ${this.availableTickets}\n\n`;
             this.emit("Delete order", false);
 
             return false;
@@ -66,29 +76,43 @@ class TicketService extends EventEmitter {
                     order.setNbTickets(tickets);
                 }
                 order.setDate(date);
+                this.logs += `${moment().format('MMMM Do YYYY, h:mm:ss a')} - A change in order id:${order.getId()}\n`;
+                this.logs += `Number of Tickets available: ${this.availableTickets}\n\n`;
                 this.emit("Change order", order);
 
                 return true;
             }
         }
+        this.logs += `${moment().format('MMMM Do YYYY, h:mm:ss a')} - Request to edit an Order was unsuccessful\n`;
+        this.logs += `Number of Tickets available: ${this.availableTickets}\n\n`;
         this.emit("Change order", false);
 
         return false;
     }
 
     getAllOrders() {
+        this.logs += `${moment().format('MMMM Do YYYY, h:mm:ss a')} - Request to get all the Orders was made by Admin\n`;
+        this.logs += `Number of Tickets available: ${this.availableTickets}\n\n`;
         this.emit("Get all orders");
 
         return this.orders;
     }
 
     destroyAllOrders() {
-        this.emit("Destroy all orders");
-
         this.orders = [];
         this.availableTickets += this.soldTickets;
         this.soldTickets = 0;
+        this.logs += `${moment().format('MMMM Do YYYY, h:mm:ss a')} - Request to destroy all the Orders was made by Admin\n`;
+        this.logs += `Number of Tickets available: ${this.availableTickets}\n\n`;
+        this.emit("Destroy all orders");
+
         return true;
+    }
+
+    getLogs() {
+        this.emit("Get Logs");
+
+        return this.logs;
     }
 
 }
@@ -115,6 +139,7 @@ const ticketService = (new TicketService(config.nbTickets))
             console.log(`Sorry we couldn't add your order 😞`);
         }
     })
+    .on('Get Logs', () => console.log(`Getting Logs`))
 
 
 module.exports = ticketService;

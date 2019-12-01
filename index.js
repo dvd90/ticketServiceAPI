@@ -5,7 +5,6 @@ const chalk = require('chalk');
 
 const server = http.createServer(controller);
 
-
 console.log(chalk.underline.blue("Welcome to Shenkar wonderful Ticket Service for the Lady Gaga live show 🔥"));
 console.log(chalk.yellow("\nWaiting for API calls..."));
 

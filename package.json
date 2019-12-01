@@ -4,7 +4,8 @@
   "description": "HW 1 - Ticket service for Lady Gaga live show in Israel. ",
   "main": "index.js",
   "scripts": {
-    "test": "node index.js"
+    "test": "node index.js",
+    "start": "node index.js"
   },
   "author": "David Sellam",
   "license": "ISC",
