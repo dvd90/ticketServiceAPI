@@ -1,15 +1,17 @@
 # Ticket Service API
+
+
 # Introduction
 This is an Api that provide a http interface in order to book tickets for the Lady Gaga live show in Tel Aviv.
 
 # Overview
-There are 6 calls available:
+##There are 6 calls available:
 
-*If you want to book a new order*
-POST:
+###*If you want to book a new order*
+####POST:
 /addNewOrder
-Query Params: name, password REQUIRED
-Body(JSON): exemple {"nbtickets": 1} REQUIRED
+- Query Params: name, password REQUIRED
+> Body(JSON): exemple {"nbtickets": 1} REQUIRED
 
 *If you want to edit an order*
 PUT:
@@ -22,8 +24,9 @@ DELETE:
 /cancelOrder
 Query Params: id REQUIRED
 
+> [!WARNING]
+> **ADMIN ONLY**
 
-**ADMIN ONLY**
 
 *If you want a list of all the orders*
 GET:
