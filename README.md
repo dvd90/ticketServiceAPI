@@ -53,3 +53,9 @@ The Authentication of the user is made by "Query Params" name, password
 - **400** -> For bad request Query missing etc ...
 - **401** -> Authorization
 - **404** -> Path doesn't exist
+
+#### *For more infos on the documentation website*
+https://documenter.getpostman.com/view/7216674/SWDzeM4W?version=latest#error-codes
+
+
+Thanks
