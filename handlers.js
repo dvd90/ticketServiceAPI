@@ -92,6 +92,21 @@ const logs = (req, res, user_repo) => {
     }
 }
 
+const Home = (res, fs) => {
+    res.writeHeader(200, {
+        'Content-Type': 'text/html'
+    });
+    fs.readFile('./home.html', null, (error, data) => {
+        if (error) {
+            res.writeHead(404);
+            res.write('Whoops! File not found!');
+        } else {
+            res.write(data);
+        }
+        res.end();
+    });
+}
+
 
 module.exports = {
     GetOrders,
@@ -100,5 +115,6 @@ module.exports = {
     EditOrder,
     ResetOrders,
     CancelOrder,
-    logs
+    logs,
+    Home
 };
