@@ -1,61 +1,84 @@
 # Ticket Service API
 
-#### *For more infos on the documentation website*
+#### _For more infos on the documentation website_
+
 https://documenter.getpostman.com/view/7216674/SWDzeM4W?version=latest#error-codes
 
+#### _Link to the deployed Heroku Website_
+
+https://dashboard.heroku.com/apps/rocky-shelf-76247
+
 # Introduction
+
 This is an Api that provide a http interface in order to book tickets for the Lady Gaga live show in Tel Aviv.
 
 # Overview
+
 ## There are 6 calls available:
 
-### *If you want to book a new order*
+### _If you want to book a new order_
+
 #### POST:
+
 **/addNewOrder**
+
 - Query Params: name, password REQUIRED
 - Body(JSON): exemple {"nbtickets": 1} REQUIRED
 
-### *If you want to edit an order*
+### _If you want to edit an order_
+
 #### PUT:
+
 **/editOrder**
+
 - Query Params: id, tickets(nb of tickets) REQUIRED
 
+### _If you want to edit an order_
 
-### *If you want to edit an order*
 #### DELETE:
+
 **/cancelOrder**
+
 - Query Params: id REQUIRED
 
+# **_ADMIN ONLY_**
 
-# ***ADMIN ONLY***
+### _If you want a list of all the orders_
 
-
-### *If you want a list of all the orders*
 #### GET:
+
 **/getAllOrders**
+
 - Query Params: name, password REQUIRED
 
-### *If you want the session logs*
+### _If you want the session logs_
+
 #### GET:
+
 **/logs**
+
 - Query Params: name, password REQUIRED
 
-### *If you want to reset and destroy all the orders*
+### _If you want to reset and destroy all the orders_
+
 #### DELETE:
+
 **/resetAllOrders**
+
 - Query Params: name, password REQUIRED
 
 # Authentication
+
 The Authentication of the user is made by "Query Params" name, password
 
-*example:*
+_example:_
+
 - /addNewOrder?name=[nameoftheuser]&password=[password]
 
 # Error Codes
+
 - **400** -> For bad request Query missing etc ...
 - **401** -> Authorization
 - **404** -> Path doesn't exist
-
-
 
 Thanks
