@@ -2,7 +2,7 @@
 
 #### _For more infos on the documentation website_
 
-https://documenter.getpostman.com/view/7216674/SWDzeM4W?version=latest#error-codes
+https://documenter.getpostman.com/view/7216674/SWDzeM4W
 
 #### _Link to the deployed Heroku Website_
 
