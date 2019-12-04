@@ -6,7 +6,7 @@ https://documenter.getpostman.com/view/7216674/SWDzeM4W?version=latest#error-cod
 
 #### _Link to the deployed Heroku Website_
 
-https://dashboard.heroku.com/apps/rocky-shelf-76247
+https://rocky-shelf-76247.herokuapp.com/
 
 # Introduction
 
